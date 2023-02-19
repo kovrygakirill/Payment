@@ -1,0 +1,3 @@
+For run tests:
+1. python manage.py migrate --settings=config.settings.test
+2. python manage.py test tests --settings=config.settings.test
