@@ -14,7 +14,7 @@ class PaymentsViewSet(viewsets.ViewSet):
     validator = ValidatorPayment()
 
     def make_payment(self, request: Request, id: int):
-        form = PaymentForm(request.POST)
+        form = PaymentForm(request.POST or request.data)
         if form.is_valid():
             try:
                 recipients: str = form.cleaned_data["tins"]
