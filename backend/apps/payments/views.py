@@ -13,7 +13,7 @@ from business_logic.my_exceptions import MyException
 class PaymentsViewSet(viewsets.ViewSet):
     validator = ValidatorPayment()
 
-    def make_payment(self, request: Request, id: int):
+    def make_payment(self, request: Request, u_id: int):
         form = PaymentForm(request.POST or request.data)
         if form.is_valid():
             try:
@@ -22,7 +22,7 @@ class PaymentsViewSet(viewsets.ViewSet):
                 recipients_list = self.validator.convert_to_list_recipients(recipients=recipients)
                 money = self.validator.check_valid_money(money=money)
 
-                user_sender = get_user_profile_by_id(user_id=id)
+                user_sender = get_user_profile_by_id(user_id=u_id)
                 users_recipients = get_users_profile_by_tin(tins=recipients_list)
 
                 make_payment(user_from=user_sender, users_to=users_recipients, money=money)

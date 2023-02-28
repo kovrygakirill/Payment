@@ -6,5 +6,5 @@ payment = PaymentsViewSet.as_view({
 })
 
 urlpatterns = [
-    path(r'user/<int:id>/', payment, name='payment'),
+    path(r'user/<int:u_id>/', payment, name='payment'),
 ]
