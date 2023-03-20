@@ -12,6 +12,8 @@ class TestPayment(TestCaseDB):
         super().setUpClass()
         cls.client = Client()
 
+    # todo copy past path URL
+
     def test_make_payment_url_exists_at_desired_location(self):
         response = self.client.post('/payments/user/2/')
         self.assertEqual(response.status_code, 200)

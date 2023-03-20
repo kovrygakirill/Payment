@@ -19,9 +19,12 @@ class PaymentsViewSet(viewsets.ViewSet):
             try:
                 recipients: str = form.cleaned_data["tins"]
                 money: Decimal = form.cleaned_data["money"]
+
+                # todo validator not need, because need check in serializer or form
                 recipients_list = self.validator.convert_to_list_recipients(recipients=recipients)
                 money = self.validator.check_valid_money(money=money)
 
+                # todo better use managers
                 user_sender = get_user_profile_by_id(user_id=u_id)
                 users_recipients = get_users_profile_by_tin(tins=recipients_list)
 

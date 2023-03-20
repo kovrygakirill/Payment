@@ -6,13 +6,16 @@ from business_logic.my_exceptions import LackOfBalance, NotValidTINsForSend, Pro
 
 
 def make_payment(user_from: UserProfile, users_to: list[UserProfile], money: Decimal) -> None:
+    # todo need validator
     if not users_to:
         raise NotValidTINsForSend("This tins dont exist")
 
+    # todo need validator
     if user_from.balance >= money:
         money_for_each = money / len(users_to)
 
         try:
+            # todo transaction not need here, 1 query to db
             with transaction.atomic():
                 user_from.balance -= money
                 user_bulk_update_list = [user_from]
